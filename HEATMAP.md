@@ -152,3 +152,4 @@
 2024-09-17 - small formatting / doc touch to record activity
 2024-09-18 - small formatting / doc touch to record activity
 2024-09-19 - small formatting / doc touch to record activity
+2024-06-01 [commit 1/12] - activity record
