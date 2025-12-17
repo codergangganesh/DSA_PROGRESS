@@ -1,0 +1,45 @@
+class Solution {
+    public boolean isLeaf(Node root){
+        return root!=null && root.left==null && root.right==null;
+    }
+    ArrayList<Integer> ans = new ArrayList<>();
+    public void leftBoundary(Node root){
+        if(root!=null){
+            if(!isLeaf(root))
+              ans.add(root.data);
+            if(root.left!=null)
+              leftBoundary(root.left);
+            else
+             leftBoundary(root.right);
+        }
+    }
+    public void rightBoundary(Node root){
+        List<Integer> li = new ArrayList<>();
+        if(root!=null){
+            if(!isLeaf(root))
+              li.add(root.data);
+            if(root.right!=null)
+             rightBoundary(root.right);
+            else
+              rightBoundary(root.left);
+        }
+        Collections.reverse(li);
+       ans.addAll(li);
+    }
+    public void leafBoundary(Node root){
+        if(root!=null){
+            if(isLeaf(root))
+              ans.add(root.data);
+            leafBoundary(root.left);
+            leafBoundary(root.right);
+        }
+    }
+    ArrayList<Integer> boundaryTraversal(Node root) {
+        if(!isLeaf(root))
+         ans.add(root.data);
+        leftBoundary(root.left);
+        leafBoundary(root);
+        rightBoundary(root.right);
+      return ans;
+    }
+}
