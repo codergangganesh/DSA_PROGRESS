@@ -1,0 +1,25 @@
+class Solution {
+    int mi = 0;
+    int ma = 0;
+    public void preorder(Node root,int r,int c,HashMap<Integer,int[]> map){
+        if (root!=null){
+            mi = Math.min(mi,c);
+            ma = Math.max(ma,c);
+            if (!map.containsKey(c) || r >= map.get(c)[1])
+                map.put(c,new int[]{root.data,r});
+            preorder(root.left,r+1,c-1,map);
+            preorder(root.right,r+1,c+1,map);
+        }
+    }
+    public ArrayList<Integer> bottomView(Node root) {
+        // code here
+        HashMap<Integer,int[]> map = new HashMap<>();
+        ArrayList<Integer> res = new ArrayList<>();
+        preorder(root,0,0,map);
+        for (int i = mi;i<=ma;i++){
+            res.add(map.get(i)[0]);
+        }
+        return res;
+        
+    }
+}
