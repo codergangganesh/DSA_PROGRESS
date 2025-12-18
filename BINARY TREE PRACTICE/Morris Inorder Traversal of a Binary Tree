@@ -1,0 +1,26 @@
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> in = new ArrayList<>();
+        while (root!=null){
+            if (root.left==null){
+                in.add(root.val);
+                root = root.right;
+
+            }
+            else{
+                TreeNode x = root.left;
+                while(x.right!=null && x.right!=root) x = x.right;
+                if (x.right==null){
+                    x.right = root;
+                    root = root.left;
+                }
+                else{
+                    in.add(root.val);
+                    x.right = null;
+                    root = root.right;
+                }
+            }
+        }
+        return in;
+    }
+}

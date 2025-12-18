@@ -1,0 +1,13 @@
+class Solution {
+    public int findMin(int n) {
+        // code here
+        int a = 0;
+        int c = 10;
+        while (n>0){
+            a += n/c;
+            n = n%c;
+            c = c/2;
+        }
+        return a;
+    }
+}

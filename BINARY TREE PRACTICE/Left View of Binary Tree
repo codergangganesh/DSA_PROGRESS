@@ -1,0 +1,16 @@
+class Solution {
+    ArrayList<Integer> res = new ArrayList<>();
+    public void preorder(Node root,int r,int c){
+        if (root!=null){
+            if (r==res.size())
+                res.add(root.data);
+            preorder(root.left,r+1,c-1);
+            preorder(root.right,r+1,c+1);
+        }
+    }
+    public ArrayList<Integer> leftView(Node root) {
+        preorder(root,0,0);
+        return res;
+        
+    }
+}

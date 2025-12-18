@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Solution {
+
+    public static List<Integer> maxCombinations(int[] firstArr, int[] secondArr, int limitVal) {
+
+        Arrays.sort(firstArr);
+        Arrays.sort(secondArr);
+
+        reverseData(firstArr);
+        reverseData(secondArr);
+
+        PriorityQueue<int[]> maxStore =
+                new PriorityQueue<>((x, y) -> y[0] - x[0]);
+
+        HashSet<String> visitedSet = new HashSet<>();
+
+        maxStore.add(new int[]{firstArr[0] + secondArr[0], 0, 0});
+        visitedSet.add("0_0");
+
+        List<Integer> finalList = new ArrayList<>();
+
+        while (limitVal-- > 0 && !maxStore.isEmpty()) {
+
+            int[] topItem = maxStore.poll();
+            finalList.add(topItem[0]);
+
+            int posA = topItem[1];
+            int posB = topItem[2];
+
+            if (posA + 1 < firstArr.length) {
+                String keyOne = (posA + 1) + "_" + posB;
+                if (!visitedSet.contains(keyOne)) {
+                    maxStore.add(new int[]{
+                        firstArr[posA + 1] + secondArr[posB],
+                        posA + 1,
+                        posB
+                    });
+                    visitedSet.add(keyOne);
+                }
+            }
+
+            if (posB + 1 < secondArr.length) {
+                String keyTwo = posA + "_" + (posB + 1);
+                if (!visitedSet.contains(keyTwo)) {
+                    maxStore.add(new int[]{
+                        firstArr[posA] + secondArr[posB + 1],
+                        posA,
+                        posB + 1
+                    });
+                    visitedSet.add(keyTwo);
+                }
+            }
+        }
+
+        return finalList;
+    }
+
+    static void reverseData(int[] dataBlock) {
+        int leftIdx = 0, rightIdx = dataBlock.length - 1;
+        while (leftIdx < rightIdx) {
+            int swapVal = dataBlock[leftIdx];
+            dataBlock[leftIdx] = dataBlock[rightIdx];
+            dataBlock[rightIdx] = swapVal;
+            leftIdx++;
+            rightIdx--;
+        }
+    }
+}

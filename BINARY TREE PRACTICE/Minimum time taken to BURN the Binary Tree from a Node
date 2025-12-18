@@ -1,0 +1,49 @@
+
+class Solution {
+    public int minTime(Node root, int target) {
+        if (root == null) return 0;
+        Node tar;
+        HashMap<Node,Node> pmap = new HashMap<>();
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        pmap.put(root,null);
+        while(!q.isEmpty()){
+            Node x = q.poll();
+            if (x.data==target) tar= x;
+            if (x.left!=null){
+                pmap.put(x.left,x);
+                q.add(x.left);
+            }
+            if (x.right!=null){
+                pmap.put(x.right,x);
+                q.add(x.right);
+            }
+        }
+        Queue<Node> queue = new LinkedList<>();
+        Set<Node> visited = new HashSet<>();
+        queue.offer(tar);
+        visited.add(tar);
+        int currentLevel = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                if (node.left != null && !visited.contains(node.left)) {
+                    visited.add(node.left);
+                    queue.offer(node.left);
+                }
+                if (node.right != null && !visited.contains(node.right)) {
+                    visited.add(node.right);
+                    queue.offer(node.right);
+                }
+                Node parent = pmap.get(node);
+                if (parent != null && !visited.contains(parent)) {
+                    visited.add(parent);
+                    queue.offer(parent);
+                }
+            }
+            currentLevel++;
+        }
+        return currentLevel--;
+    }
+}

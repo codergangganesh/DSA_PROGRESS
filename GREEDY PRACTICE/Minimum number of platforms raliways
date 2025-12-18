@@ -1,0 +1,21 @@
+class Solution {
+    public int minPlatform(int arr[], int dep[]) {
+        //  code here
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        int p =1, r = 1,i = 1,j = 0;
+        while (i<arr.length){
+            if (arr[i]<=dep[j]){
+                p++;
+                if (p>r)
+                    r=p;
+                i++;
+            }
+            else{
+                j++;
+                p--;
+            }
+        }
+        return r;
+    }
+}

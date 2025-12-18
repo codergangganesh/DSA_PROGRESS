@@ -1,0 +1,25 @@
+class Solution {
+    public boolean checkValidString(String s) {
+        int minop = 0;
+        int maxop = 0;
+        for (Character ch : s.toCharArray()){
+            if (ch=='('){
+                minop++;
+                maxop++;
+            }
+            else if (ch==')'){
+                minop--;
+                maxop--;
+            }
+            else{
+                minop--;
+                maxop++;
+            }
+            if (maxop<0)
+                return false;
+            if (minop<0)
+                minop = 0;
+        }
+        return minop==0;
+    }
+}

@@ -1,0 +1,20 @@
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+        for (ListNode head : lists) {
+            if (head != null) {
+                pq.add(head);
+            }
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode t = dummy;
+        while (!pq.isEmpty()){
+            ListNode cur = pq.poll();
+            t.next=cur;
+            t=t.next;
+            if (cur.next != null)
+                pq.add(cur.next);
+        }
+        return dummy.next;
+    }
+}

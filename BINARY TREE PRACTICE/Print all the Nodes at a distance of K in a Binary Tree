@@ -1,0 +1,53 @@
+class Solution {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        if (root == null) return new ArrayList<>();
+
+        HashMap<TreeNode,TreeNode> pmap = new HashMap<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        pmap.put(root,null);
+        while(!q.isEmpty()){
+            TreeNode x = q.poll();
+            
+            if (x.left!=null){
+                pmap.put(x.left,x);
+                q.add(x.left);
+            }
+            if (x.right!=null){
+                pmap.put(x.right,x);
+                q.add(x.right);
+            }
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        Set<TreeNode> visited = new HashSet<>();
+        queue.offer(target);
+        visited.add(target);
+        int currentLevel = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            if (currentLevel == k) break;
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null && !visited.contains(node.left)) {
+                    visited.add(node.left);
+                    queue.offer(node.left);
+                }
+                if (node.right != null && !visited.contains(node.right)) {
+                    visited.add(node.right);
+                    queue.offer(node.right);
+                }
+                TreeNode parent = pmap.get(node);
+                if (parent != null && !visited.contains(parent)) {
+                    visited.add(parent);
+                    queue.offer(parent);
+                }
+            }
+            currentLevel++;
+        }
+        List<Integer> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            result.add(queue.poll().val);
+        }
+        return result;
+    }
+}

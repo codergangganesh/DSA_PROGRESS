@@ -1,0 +1,16 @@
+class Solution {
+    ArrayList<Integer> res = new ArrayList<>();
+    public void preorder(TreeNode root,int r,int c){
+        if (root!=null){
+            if (r==res.size())
+                res.add(root.val);
+            preorder(root.right,r+1,c+1);
+            preorder(root.left,r+1,c-1);
+        }
+    }
+    public List<Integer> rightSideView(TreeNode root) {
+        preorder(root,0,0);
+        return res;
+        
+    }
+}

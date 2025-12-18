@@ -1,0 +1,29 @@
+class Solution {
+    public ArrayList<Integer> jobSequencing(int[] deadline, int[] profit) {
+        // code here
+        int n = deadline.length;
+        int arr[][] = new int[n][2];
+        int ma=-1;
+        for (int i =0;i<n;i++){
+            arr[i][0] = deadline[i];
+            arr[i][1] = profit[i];
+            if (deadline[i]>ma)
+                ma = deadline[i];
+        }
+        Arrays.sort(arr,(a,b)->b[1]-a[1]);
+        int s[] = new int[ma+1];
+        int job_c = 0,t_profit = 0;
+        for (int i=0;i<n;i++){
+            int j=arr[i][0];
+            while (j>0 && s[j]==1) j--;
+            if (j>0){
+                job_c++;
+                t_profit += arr[i][1];
+                s[j]=1;
+                if (job_c==n || job_c==ma)
+                    break;
+            }
+        }
+        return new ArrayList<>(Arrays.asList(job_c, t_profit));
+    }
+}

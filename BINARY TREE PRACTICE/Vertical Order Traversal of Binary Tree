@@ -1,0 +1,33 @@
+class Solution {
+    public void preorder(TreeNode root,int r,int c,ArrayList<int[]> arr){
+        if (root!=null){
+            arr.add(new int[]{c,r,root.val});
+            preorder(root.left,r+1,c-1,arr);
+            preorder(root.right,r+1,c+1,arr);
+        }
+    }
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        ArrayList<int[]> nodes = new ArrayList<>();
+        preorder(root,0,0,nodes);
+        nodes.sort((a,b)->{
+            if (a[0]!=b[0])
+                return Integer.compare(a[0],b[0]);
+            if (a[1]!=b[1])
+                return Integer.compare(a[1],b[1]);
+            return Integer.compare(a[2],b[2]);
+        });
+        List<List<Integer>> res = new ArrayList<>();
+        int pc = Integer.MIN_VALUE;
+        List<Integer> level = new ArrayList<>();
+        for (int[] cur : nodes){
+            if (cur[0]!=pc){
+                if (pc!=Integer.MIN_VALUE) res.add(level);
+                pc=cur[0];
+                level = new ArrayList<>();
+            }
+            level.add(cur[2]);
+        }
+        res.add(level);
+        return res;
+    }
+}
