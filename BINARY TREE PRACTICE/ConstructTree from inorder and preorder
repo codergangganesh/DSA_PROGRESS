@@ -1,0 +1,18 @@
+class Solution {
+    public TreeNode build(int[] preorder , int ps,int pe,int[] inorder,int is,int ie,HashMap<Integer,Integer> imap){
+        if (ps>pe || is>ie) return null;
+        int val = preorder[ps];
+        TreeNode root = new TreeNode(val);
+        int x = imap.get(val);
+        int nl = x - is;
+        root.left = build(preorder ,ps+1,pe+nl ,inorder,is,x-1,imap);
+        root.right = build(preorder ,ps+nl+1,pe ,inorder,x+1,ie,imap);
+        return root;
+    }
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        HashMap<Integer,Integer> inmap = new HashMap<>();
+        for (int i = 0;i<inorder.length;i++)
+            inmap.put(inorder[i],i);
+        return build(preorder,0,preorder.length-1,inorder,0,inorder.length-1,inmap);
+    }
+}
