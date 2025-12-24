@@ -34,7 +34,6 @@ class Solution {
                 if (dfs(adj, visited, pathVisited, i))
                     return true;
             }
-            return false;
         }
         return false;
 }
