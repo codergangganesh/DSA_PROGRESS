@@ -4,13 +4,7 @@ class Solution {
         
         visited[v] = 1;
         pathVisited[v] = 1;
-        for(int x:adj.get(v))
-        {
-            if(pathVisited[x] == 1)
-                return true;
-            if (visited[x] ==0 && dfs(adj,visited,pathVisited,x))
-                return true;
-        }
+        
         pathVisited[v] = 0;
         return false;
     }
