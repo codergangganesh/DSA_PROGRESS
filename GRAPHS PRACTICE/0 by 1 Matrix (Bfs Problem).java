@@ -20,15 +20,7 @@ class Solution {
             int row = cell[0];
             int col = cell[1];
 
-            for (int[] direction : directions) {
-                int newRow = row + direction[0];
-                int newCol = col + direction[1];
-
-                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && mat[newRow][newCol] > mat[row][col] + 1) {
-                    mat[newRow][newCol] = mat[row][col] + 1;
-                    queue.add(new int[]{newRow, newCol});
-                }
-            }
+            
         }
 
         return mat;        
