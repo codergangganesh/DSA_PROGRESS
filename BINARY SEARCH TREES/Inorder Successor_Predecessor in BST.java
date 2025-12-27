@@ -14,7 +14,14 @@ class Solution {
     Node prede = null;
 
     public Node getSuccessor(Node root, int key) {
-        
+        while (root != null) {
+            if (key >= root.data)
+                root = root.right;
+            else {
+                succ = root;
+                root = root.left;
+            }
+        }
         return succ;
     }
 
