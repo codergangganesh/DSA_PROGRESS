@@ -14,8 +14,7 @@ class Solution {
         int ceil=-1;
         while(root!=null)
         {
-            if(root.data==x)
-                return x;
+            
             else if(x<root.data)
             {
                 ceil=root.data;
