@@ -17,7 +17,7 @@
 class Solution {
 
 public boolean isValidBSTUtil(TreeNode root, long min, long max) {
-    if (root == null) return true;
+   
 
     if (root.val <= min || root.val >= max) return false;
 
