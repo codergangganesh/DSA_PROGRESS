@@ -13,7 +13,14 @@ class Solution {
         while (!pq.isEmpty()){
             ArrayList <Integer> arr = new ArrayList<>();
             int i =0;
-            
+            while (i<c && !pq.isEmpty()){
+                int f = pq.poll();
+                t++;
+                i++;
+                f--;
+                if (f!=0)
+                    arr.add(f);
+            }
             if (pq.isEmpty() && arr.isEmpty())
                 break;
             if (pq.isEmpty())
