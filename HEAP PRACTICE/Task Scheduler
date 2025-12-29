@@ -18,8 +18,7 @@ class Solution {
                 t++;
                 i++;
                 f--;
-                if (f!=0)
-                    arr.add(f);
+                
             }
             if (pq.isEmpty() && arr.isEmpty())
                 break;
